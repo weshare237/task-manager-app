@@ -4,11 +4,14 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 const tasksRouter = require('./routes/tasks')
+const notFound = require('./middlewares/not-found')
 
 app.use(express.static('./public'))
 app.use(express.json())
 
 app.use('/api/v1/tasks', tasksRouter)
+
+app.use(notFound)
 
 const start = async () => {
   try {
