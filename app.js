@@ -5,6 +5,7 @@ const app = express()
 const port = process.env.PORT || 5000
 const tasksRouter = require('./routes/tasks')
 const notFound = require('./middlewares/not-found')
+const errorHandlerMiddleware = require('./middlewares/error-handler')
 
 app.use(express.static('./public'))
 app.use(express.json())
@@ -12,6 +13,8 @@ app.use(express.json())
 app.use('/api/v1/tasks', tasksRouter)
 
 app.use(notFound)
+
+app.use(errorHandlerMiddleware)
 
 const start = async () => {
   try {
